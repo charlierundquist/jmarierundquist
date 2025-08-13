@@ -60,7 +60,8 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
     const cacheTag = resource.updatedAt
 
     // src = getMediaUrl(url, cacheTag)
-    src = url || ''
+    const utURL = process.env.UPLOADTHING_PROJECT_URL
+    src = `${utURL}/${_key}`
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)

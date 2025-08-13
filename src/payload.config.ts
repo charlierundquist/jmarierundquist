@@ -93,12 +93,11 @@ export default buildConfig({
     uploadthingStorage({
       collections: {
         media: {
-          prefix: 'media',
           disablePayloadAccessControl: true,
           generateFileURL({ collection, filename }) {
             const origin = process.env.UPLOADTHING_PROJECT_URL
             const key = getKeyFromFilename(collection, filename)
-            return `${origin}/${key}`
+            return `${origin}${key}`
           },
         },
       },
