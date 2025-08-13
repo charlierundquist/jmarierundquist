@@ -1,14 +1,25 @@
 // storage-adapter-import-placeholder
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import { resendAdapter } from '@payloadcms/email-resend'
+import { BeforeEmail } from '@payloadcms/plugin-form-builder/types'
+import { FormSubmission } from '@/payload-types'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Pages } from './collections/Pages'
+import { Header } from './app/components/Header/config'
+import { Books } from './collections/Books'
+import { SiteDetails } from './app/components/SiteDetails/config'
+import { Footer } from './app/components/Footer/config'
+import { env } from 'process'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -19,8 +30,28 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    livePreview: {
+      url: ({ collectionConfig, data }) =>
+        `/${collectionConfig?.slug === 'pages' ? (data.slug !== 'home' ? data.slug : '') : ''}`,
+      collections: ['pages'],
+      breakpoints: [
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 1080,
+        },
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+      ],
+    },
   },
-  collections: [Users, Media],
+  globals: [Header, Footer, SiteDetails],
+  collections: [Users, Media, Books, Pages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -32,8 +63,32 @@ export default buildConfig({
     },
   }),
   sharp,
+  email: resendAdapter({
+    defaultFromAddress: 'charlie@charlierundquist.com',
+    defaultFromName: 'Charlie Rundquist',
+    apiKey: env.RESEND_API_KEY || '',
+  }),
   plugins: [
     payloadCloudPlugin(),
+    formBuilderPlugin({
+      formOverrides: {
+        admin: {
+          group: 'Forms',
+        },
+      },
+      formSubmissionOverrides: {
+        admin: {
+          group: 'Forms',
+        },
+      },
+    }),
     // storage-adapter-placeholder
   ],
+  // onInit: async (payload) => {
+  //   await payload.update({
+  //     collection: 'pages',
+  //     where: {},
+  //     data: { _status: 'published' },
+  //   })
+  // },
 })

@@ -69,23 +69,45 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    books: Book;
+    pages: Page;
+    forms: Form;
+    'form-submissions': FormSubmission;
+    'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    'payload-folders': {
+      documentsAndFolders: 'payload-folders' | 'pages';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    books: BooksSelect<false> | BooksSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    forms: FormsSelect<false> | FormsSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    header: Header;
+    footer: Footer;
+    'site-details': SiteDetail;
+  };
+  globalsSelect: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'site-details': SiteDetailsSelect<false> | SiteDetailsSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -118,7 +140,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -142,7 +164,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -155,26 +177,739 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    square?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "books".
+ */
+export interface Book {
+  id: number;
+  coverImage?: (number | null) | Media;
+  title: string;
+  tagline?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  hasAlert?: boolean | null;
+  alertText?: string | null;
+  praise?:
+    | {
+        reviewerName: string;
+        reviewerTitle?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        reviewerWebsite?: {
+          type?: ('internal' | 'external') | null;
+          newTab?: boolean | null;
+          internalLink?: (number | null) | Page;
+          externalLink?: string | null;
+        };
+        review?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  extras?:
+    | {
+        link?: {
+          type?: ('internal' | 'external') | null;
+          newTab?: boolean | null;
+          internalLink?: (number | null) | Page;
+          externalLink?: string | null;
+          linkText?: string | null;
+        };
+        extraDescription?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Links to direct users to purchase or learn more.
+   */
+  links?: {
+    aboutPage?: {
+      type?: ('internal' | 'external') | null;
+      newTab?: boolean | null;
+      internalLink?: (number | null) | Page;
+      externalLink?: string | null;
+      linkText?: string | null;
+    };
+    directSalePage?: {
+      type?: ('internal' | 'external') | null;
+      newTab?: boolean | null;
+      internalLink?: (number | null) | Page;
+      externalLink?: string | null;
+      linkText?: string | null;
+    };
+    retailersPage?: {
+      type?: ('internal' | 'external') | null;
+      newTab?: boolean | null;
+      internalLink?: (number | null) | Page;
+      externalLink?: string | null;
+      linkText?: string | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  hero: {
+    size: 'large' | 'small';
+    backgroundImage?: (number | null) | Media;
+    header: string;
+    subheader?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link?: {
+            type?: ('internal' | 'external') | null;
+            newTab?: boolean | null;
+            internalLink?: (number | null) | Page;
+            externalLink?: string | null;
+            linkText?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  pageContent?:
+    | (
+        | ShortContent
+        | LongContentOneColumn
+        | LongContentTwoColumn
+        | BookShowcase
+        | PraiseDisplay
+        | Carousel
+        | ExtrasDisplay
+        | BookDetails
+        | ListGrid
+        | ContactForm
+      )[]
+    | null;
+  folder?: (number | null) | FolderInterface;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ShortContent".
+ */
+export interface ShortContent {
+  image?: (number | null) | Media;
+  imageLocation: 'left' | 'right';
+  title: string;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link?: {
+          type?: ('internal' | 'external') | null;
+          newTab?: boolean | null;
+          internalLink?: (number | null) | Page;
+          externalLink?: string | null;
+          linkText?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'short-content';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LongContentOneColumn".
+ */
+export interface LongContentOneColumn {
+  displayImage: boolean;
+  image?: (number | null) | Media;
+  title: string;
+  subtitle?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link?: {
+          type?: ('internal' | 'external') | null;
+          newTab?: boolean | null;
+          internalLink?: (number | null) | Page;
+          externalLink?: string | null;
+          linkText?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'long-content-one-column';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LongContentTwoColumn".
+ */
+export interface LongContentTwoColumn {
+  image: number | Media;
+  imageLocation: 'left' | 'right';
+  title: string;
+  subtitle?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  links?:
+    | {
+        link?: {
+          type?: ('internal' | 'external') | null;
+          newTab?: boolean | null;
+          internalLink?: (number | null) | Page;
+          externalLink?: string | null;
+          linkText?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'long-content-two-column';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookShowcase".
+ */
+export interface BookShowcase {
+  bookSelect: number | Book;
+  imageLocation?: ('left' | 'right') | null;
+  toggleDescription?: ('praise' | 'description') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'book-showcase';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PraiseDisplay".
+ */
+export interface PraiseDisplay {
+  bookSelect: number | Book;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'praise-display';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Carousel".
+ */
+export interface Carousel {
+  blocks: (BookShowcase | ShortContent | PraiseDisplay)[];
+  autoscroll: boolean;
+  autoscrollSpeed?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExtrasDisplay".
+ */
+export interface ExtrasDisplay {
+  bookSelect: number | Book;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'extras-display';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookDetails".
+ */
+export interface BookDetails {
+  bookSelect: number | Book;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'book-details';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListGrid".
+ */
+export interface ListGrid {
+  title?: string | null;
+  items?: ListGridItem[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'list-grid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListGridItem".
+ */
+export interface ListGridItem {
+  title?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'list-grid-item';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactForm".
+ */
+export interface ContactForm {
+  hasLeadingContent?: boolean | null;
+  leadingTitle?: string | null;
+  leadingContent?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  formSelect?: (number | null) | Form;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact-form';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms".
+ */
+export interface Form {
+  id: number;
+  title: string;
+  fields?:
+    | (
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            defaultValue?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'checkbox';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'country';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'email';
+          }
+        | {
+            message?: {
+              root: {
+                type: string;
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'message';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'number';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            placeholder?: string | null;
+            options?:
+              | {
+                  label: string;
+                  value: string;
+                  id?: string | null;
+                }[]
+              | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'select';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'state';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'text';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: string | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textarea';
+          }
+      )[]
+    | null;
+  submitButtonLabel?: string | null;
+  /**
+   * Choose whether to display an on-page message or redirect to a different page after they submit the form.
+   */
+  confirmationType?: ('message' | 'redirect') | null;
+  confirmationMessage?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  redirect?: {
+    url: string;
+  };
+  /**
+   * Send custom emails when the form submits. Use comma separated lists to send the same email to multiple recipients. To reference a value from this form, wrap that field's name with double curly brackets, i.e. {{firstName}}. You can use a wildcard {{*}} to output all data and {{*:table}} to format it as an HTML table in the email.
+   */
+  emails?:
+    | {
+        emailTo?: string | null;
+        cc?: string | null;
+        bcc?: string | null;
+        replyTo?: string | null;
+        emailFrom?: string | null;
+        subject: string;
+        /**
+         * Enter the message that should be sent in this email.
+         */
+        message?: {
+          root: {
+            type: string;
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders".
+ */
+export interface FolderInterface {
+  id: number;
+  name: string;
+  folder?: (number | null) | FolderInterface;
+  documentsAndFolders?: {
+    docs?: (
+      | {
+          relationTo?: 'payload-folders';
+          value: number | FolderInterface;
+        }
+      | {
+          relationTo?: 'pages';
+          value: number | Page;
+        }
+    )[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  form: number | Form;
+  submissionData?:
+    | {
+        field: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: number;
   document?:
     | ({
         relationTo: 'users';
-        value: string | User;
+        value: number | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: string | Media;
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'books';
+        value: number | Book;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'forms';
+        value: number | Form;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: number | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'payload-folders';
+        value: number | FolderInterface;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -184,10 +919,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -207,7 +942,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -252,6 +987,535 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        square?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        xlarge?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "books_select".
+ */
+export interface BooksSelect<T extends boolean = true> {
+  coverImage?: T;
+  title?: T;
+  tagline?: T;
+  description?: T;
+  hasAlert?: T;
+  alertText?: T;
+  praise?:
+    | T
+    | {
+        reviewerName?: T;
+        reviewerTitle?: T;
+        reviewerWebsite?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+            };
+        review?: T;
+        id?: T;
+      };
+  extras?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        extraDescription?: T;
+        id?: T;
+      };
+  links?:
+    | T
+    | {
+        aboutPage?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        directSalePage?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        retailersPage?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  hero?:
+    | T
+    | {
+        size?: T;
+        backgroundImage?: T;
+        header?: T;
+        subheader?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    internalLink?: T;
+                    externalLink?: T;
+                    linkText?: T;
+                  };
+              id?: T;
+            };
+      };
+  pageContent?:
+    | T
+    | {
+        'short-content'?: T | ShortContentSelect<T>;
+        'long-content-one-column'?: T | LongContentOneColumnSelect<T>;
+        'long-content-two-column'?: T | LongContentTwoColumnSelect<T>;
+        'book-showcase'?: T | BookShowcaseSelect<T>;
+        'praise-display'?: T | PraiseDisplaySelect<T>;
+        carousel?: T | CarouselSelect<T>;
+        'extras-display'?: T | ExtrasDisplaySelect<T>;
+        'book-details'?: T | BookDetailsSelect<T>;
+        'list-grid'?: T | ListGridSelect<T>;
+        'contact-form'?: T | ContactFormSelect<T>;
+      };
+  folder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ShortContent_select".
+ */
+export interface ShortContentSelect<T extends boolean = true> {
+  image?: T;
+  imageLocation?: T;
+  title?: T;
+  content?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LongContentOneColumn_select".
+ */
+export interface LongContentOneColumnSelect<T extends boolean = true> {
+  displayImage?: T;
+  image?: T;
+  title?: T;
+  subtitle?: T;
+  content?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LongContentTwoColumn_select".
+ */
+export interface LongContentTwoColumnSelect<T extends boolean = true> {
+  image?: T;
+  imageLocation?: T;
+  title?: T;
+  subtitle?: T;
+  content?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookShowcase_select".
+ */
+export interface BookShowcaseSelect<T extends boolean = true> {
+  bookSelect?: T;
+  imageLocation?: T;
+  toggleDescription?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PraiseDisplay_select".
+ */
+export interface PraiseDisplaySelect<T extends boolean = true> {
+  bookSelect?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Carousel_select".
+ */
+export interface CarouselSelect<T extends boolean = true> {
+  blocks?:
+    | T
+    | {
+        'book-showcase'?: T | BookShowcaseSelect<T>;
+        'short-content'?: T | ShortContentSelect<T>;
+        'praise-display'?: T | PraiseDisplaySelect<T>;
+      };
+  autoscroll?: T;
+  autoscrollSpeed?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExtrasDisplay_select".
+ */
+export interface ExtrasDisplaySelect<T extends boolean = true> {
+  bookSelect?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BookDetails_select".
+ */
+export interface BookDetailsSelect<T extends boolean = true> {
+  bookSelect?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListGrid_select".
+ */
+export interface ListGridSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        'list-grid-item'?: T | ListGridItemSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ListGridItem_select".
+ */
+export interface ListGridItemSelect<T extends boolean = true> {
+  title?: T;
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactForm_select".
+ */
+export interface ContactFormSelect<T extends boolean = true> {
+  hasLeadingContent?: T;
+  leadingTitle?: T;
+  leadingContent?: T;
+  formSelect?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms_select".
+ */
+export interface FormsSelect<T extends boolean = true> {
+  title?: T;
+  fields?:
+    | T
+    | {
+        checkbox?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              required?: T;
+              defaultValue?: T;
+              id?: T;
+              blockName?: T;
+            };
+        country?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        email?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        message?:
+          | T
+          | {
+              message?: T;
+              id?: T;
+              blockName?: T;
+            };
+        number?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              defaultValue?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        select?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              defaultValue?: T;
+              placeholder?: T;
+              options?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    id?: T;
+                  };
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        state?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        text?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              defaultValue?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+        textarea?:
+          | T
+          | {
+              name?: T;
+              label?: T;
+              width?: T;
+              defaultValue?: T;
+              required?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  submitButtonLabel?: T;
+  confirmationType?: T;
+  confirmationMessage?: T;
+  redirect?:
+    | T
+    | {
+        url?: T;
+      };
+  emails?:
+    | T
+    | {
+        emailTo?: T;
+        cc?: T;
+        bcc?: T;
+        replyTo?: T;
+        emailFrom?: T;
+        subject?: T;
+        message?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  form?: T;
+  submissionData?:
+    | T
+    | {
+        field?: T;
+        value?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-folders_select".
+ */
+export interface PayloadFoldersSelect<T extends boolean = true> {
+  name?: T;
+  folder?: T;
+  documentsAndFolders?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -284,6 +1548,264 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  links?:
+    | {
+        link?: {
+          type?: ('internal' | 'external') | null;
+          newTab?: boolean | null;
+          internalLink?: (number | null) | Page;
+          externalLink?: string | null;
+          linkText?: string | null;
+        };
+        hasDropdown?: boolean | null;
+        dropdownLinks?:
+          | {
+              link?: {
+                type?: ('internal' | 'external') | null;
+                newTab?: boolean | null;
+                internalLink?: (number | null) | Page;
+                externalLink?: string | null;
+                linkText?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  quickLinks: {
+    matchHeader: boolean;
+    customLinks?:
+      | {
+          link?: {
+            type?: ('internal' | 'external') | null;
+            newTab?: boolean | null;
+            internalLink?: (number | null) | Page;
+            externalLink?: string | null;
+            linkText?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  link?: {
+    type?: ('internal' | 'external') | null;
+    newTab?: boolean | null;
+    internalLink?: (number | null) | Page;
+    externalLink?: string | null;
+    linkText?: string | null;
+  };
+  extraInfo?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-details".
+ */
+export interface SiteDetail {
+  id: number;
+  logoImage: number | Media;
+  siteTitle: string;
+  tagline: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  socialLinks?:
+    | {
+        platform: 'facebook' | 'bluesky' | 'instagram' | 'threads' | 'bookbub';
+        profileLink: string;
+        id?: string | null;
+      }[]
+    | null;
+  ctaBlock?: {
+    ctaTitle?: string | null;
+    ctaSubtitle?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    ctaLinks?:
+      | {
+          link?: {
+            type?: ('internal' | 'external') | null;
+            newTab?: boolean | null;
+            internalLink?: (number | null) | Page;
+            externalLink?: string | null;
+            linkText?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              internalLink?: T;
+              externalLink?: T;
+              linkText?: T;
+            };
+        hasDropdown?: T;
+        dropdownLinks?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    internalLink?: T;
+                    externalLink?: T;
+                    linkText?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  quickLinks?:
+    | T
+    | {
+        matchHeader?: T;
+        customLinks?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    internalLink?: T;
+                    externalLink?: T;
+                    linkText?: T;
+                  };
+              id?: T;
+            };
+      };
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        internalLink?: T;
+        externalLink?: T;
+        linkText?: T;
+      };
+  extraInfo?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-details_select".
+ */
+export interface SiteDetailsSelect<T extends boolean = true> {
+  logoImage?: T;
+  siteTitle?: T;
+  tagline?: T;
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        profileLink?: T;
+        id?: T;
+      };
+  ctaBlock?:
+    | T
+    | {
+        ctaTitle?: T;
+        ctaSubtitle?: T;
+        ctaLinks?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    internalLink?: T;
+                    externalLink?: T;
+                    linkText?: T;
+                  };
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
