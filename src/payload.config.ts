@@ -22,6 +22,7 @@ import { Books } from './collections/Books'
 import { SiteDetails } from './app/components/SiteDetails/config'
 import { Footer } from './app/components/Footer/config'
 import { env } from 'process'
+import { getKeyFromFilename } from './app/utilities/getKeyFromFilename'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -94,9 +95,10 @@ export default buildConfig({
         media: {
           prefix: 'media',
           disablePayloadAccessControl: true,
-          generateFileURL({ prefix, filename }) {
+          generateFileURL({ collection, filename }) {
             const origin = process.env.UPLOADTHING_PROJECT_URL
-            return `${origin}/${filename}`
+            const key = getKeyFromFilename(collection, filename)
+            return `${origin}/${key}`
           },
         },
       },

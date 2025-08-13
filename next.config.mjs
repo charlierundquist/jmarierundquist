@@ -4,6 +4,8 @@ import { withPayload } from '@payloadcms/next/withPayload'
 const nextConfig = {
   images: {
     domains: ['localhost'],
+    path: '',
+    loader: 'imgix',
   },
   distDir: 'dist',
   webpack: (webpackConfig) => {
