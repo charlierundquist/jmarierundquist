@@ -59,9 +59,8 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
 
     const cacheTag = resource.updatedAt
 
-    src = getMediaUrl(url, cacheTag)
-
-    uploadthingURL = `https://8khyo0boor.ufs.sh/f/${_key}`
+    // src = getMediaUrl(url, cacheTag)
+    src = url || ''
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
@@ -89,7 +88,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         quality={100}
         loading={loading}
         sizes={sizes}
-        src={uploadthingURL}
+        src={src}
         width={!fill ? width : undefined}
       />
     </picture>

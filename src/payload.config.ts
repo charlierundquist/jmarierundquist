@@ -94,6 +94,10 @@ export default buildConfig({
         media: {
           prefix: 'media',
           disablePayloadAccessControl: true,
+          generateFileURL({ prefix, filename }) {
+            const origin = process.env.UPLOADTHING_PROJECT_URL
+            return `${origin}/${filename}`
+          },
         },
       },
       options: {

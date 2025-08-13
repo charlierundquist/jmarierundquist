@@ -30,6 +30,7 @@
     "@payloadcms/live-preview-react": "3.46.0",
     "@payloadcms/next": "3.46.0",
     "@payloadcms/payload-cloud": "3.46.0",
+    "@payloadcms/plugin-cloud-storage": "3.46.0",
     "@payloadcms/plugin-form-builder": "3.46.0",
     "@payloadcms/richtext-lexical": "3.46.0",
     "@payloadcms/storage-s3": "3.46.0",
