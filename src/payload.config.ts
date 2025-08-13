@@ -97,7 +97,7 @@ export default buildConfig({
           generateFileURL({ collection, filename }) {
             const origin = process.env.UPLOADTHING_PROJECT_URL
             const key = getKeyFromFilename(collection, filename)
-            return `${origin}${key}`
+            return `${origin}/f/${key}`
           },
         },
       },
