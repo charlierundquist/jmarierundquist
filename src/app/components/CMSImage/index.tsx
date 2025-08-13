@@ -61,7 +61,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
 
     // src = getMediaUrl(url, cacheTag)
     const utURL = process.env.UPLOADTHING_PROJECT_URL
-    src = `${utURL}/f/${_key}`
+    uploadthingURL = `${utURL}/f/${_key}`
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
@@ -90,6 +90,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         loading={loading}
         sizes={sizes}
         src={src}
+        overrideSrc={uploadthingURL}
         width={!fill ? width : undefined}
       />
     </picture>
