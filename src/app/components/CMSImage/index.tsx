@@ -34,12 +34,14 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
   let src: StaticImageData | string = srcFromProps || ''
   let focalX: number = 0
   let focalY: number = 0
+  let uploadthingURL = ''
 
   if (!src && resource && typeof resource === 'object') {
     const {
       alt: altFromResource,
       height: fullHeight,
       url,
+      _key,
       width: fullWidth,
       focalX: focalPointX,
       focalY: focalPointY,
@@ -58,6 +60,8 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
     const cacheTag = resource.updatedAt
 
     src = getMediaUrl(url, cacheTag)
+
+    uploadthingURL = `https://8khyo0boor.ufs.sh/f/${_key}`
   }
 
   const loading = loadingFromProps || (!priority ? 'lazy' : undefined)
@@ -85,7 +89,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         quality={100}
         loading={loading}
         sizes={sizes}
-        src={src}
+        src={uploadthingURL}
         width={!fill ? width : undefined}
       />
     </picture>
