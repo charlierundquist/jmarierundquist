@@ -1,5 +1,7 @@
 // storage-adapter-import-placeholder
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -57,9 +59,14 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: sqliteAdapter({
-    client: {
-      url: process.env.DATABASE_URI || '',
+  // db: sqliteAdapter({
+  //   client: {
+  //     url: process.env.DATABASE_URI || '',
+  //   },
+  // }),
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI || '',
     },
   }),
   sharp,
@@ -82,7 +89,16 @@ export default buildConfig({
         },
       },
     }),
-    // storage-adapter-placeholder
+    uploadthingStorage({
+      collections: {
+        media: {
+          prefix: 'media',
+        },
+      },
+      options: {
+        token: process.env.UPLOADTHING_TOKEN || '',
+      },
+    }),
   ],
   // onInit: async (payload) => {
   //   await payload.update({

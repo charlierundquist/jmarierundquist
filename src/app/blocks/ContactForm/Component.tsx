@@ -104,5 +104,5 @@ export function ContactFormBlock(block: ContactForm) {
     className: 'h-fit',
   }
 
-  return <BlockTemplate content={[leadingContentCol, contentCol]} shiftTopLineFalse />
+  return <BlockTemplate content={[leadingContentCol, contentCol]} />
 }
