@@ -93,6 +93,7 @@ export default buildConfig({
       collections: {
         media: {
           prefix: 'media',
+          disablePayloadAccessControl: true,
         },
       },
       options: {
