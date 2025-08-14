@@ -89,7 +89,8 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         height={!fill ? height : undefined}
         placeholder="blur"
         blurDataURL={placeholderBlur}
-        priority={priority}
+        // priority={priority}
+        priority
         quality={100}
         loading={loading}
         sizes={sizes}
