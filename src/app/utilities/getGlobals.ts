@@ -24,4 +24,5 @@ async function getGlobal<T extends Global>(slug: T, depth = 0): Promise<DataFrom
 export const getCachedGlobal = <T extends Global>(slug: T, depth = 0) =>
   unstable_cache(async () => getGlobal<T>(slug, depth), [slug], {
     tags: [`global_${slug}`],
+    revalidate: 3600 * 60 * 24,
   })

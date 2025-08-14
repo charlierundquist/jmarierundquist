@@ -89,8 +89,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         quality={100}
         loading={loading}
         sizes={sizes}
-        src={src}
-        overrideSrc={uploadthingURL}
+        src={uploadthingURL}
         width={!fill ? width : undefined}
       />
     </picture>

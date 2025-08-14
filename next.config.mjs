@@ -3,13 +3,7 @@ import { withPayload } from '@payloadcms/next/withPayload'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: process.env.UPLOADTHING_PROJECT_URL,
-        pathname: '**',
-      },
-    ],
+    remotePatterns: [new URL(`${process.env.UPLOADTHING_PROJECT_URL}/*`)],
   },
   distDir: 'dist',
   webpack: (webpackConfig) => {

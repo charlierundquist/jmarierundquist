@@ -1,9 +1,17 @@
 import { platformSelect } from '@/app/fields/platformSelect'
 import { GlobalConfig } from 'payload'
 import { ctaBlockField } from '../CTABlock/config'
+import { revalidateTag } from 'next/cache'
 
 export const SiteDetails: GlobalConfig = {
   slug: 'site-details',
+  hooks: {
+    afterChange: [
+      () => {
+        revalidateTag('global_site-details')
+      },
+    ],
+  },
   label: 'Site Details',
   fields: [
     {

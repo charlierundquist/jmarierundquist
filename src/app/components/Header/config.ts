@@ -1,8 +1,16 @@
 import { linkField } from '@/app/fields/link'
+import { revalidateTag } from 'next/cache'
 import { GlobalConfig } from 'payload'
 
 export const Header: GlobalConfig = {
   slug: 'header',
+  hooks: {
+    afterChange: [
+      () => {
+        revalidateTag('global_header')
+      },
+    ],
+  },
   fields: [
     {
       name: 'links',

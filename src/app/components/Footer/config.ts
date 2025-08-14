@@ -1,8 +1,16 @@
 import { linkField } from '@/app/fields/link'
+import { revalidateTag } from 'next/cache'
 import { GlobalConfig } from 'payload'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
+  hooks: {
+    afterChange: [
+      () => {
+        revalidateTag('global_footer')
+      },
+    ],
+  },
   fields: [
     {
       name: 'quickLinks',
