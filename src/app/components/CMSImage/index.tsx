@@ -73,6 +73,10 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         .map(([, value]) => `(max-width: ${value}px) ${value * 2}w`)
         .join(', ')
 
+  const customLoader = ({ src }: { src: string }) => {
+    return src
+  }
+
   return (
     <picture
       className={`${pictureClassName} relative block max-h-full max-w-full`}
@@ -90,6 +94,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
         loading={loading}
         sizes={sizes}
         src={uploadthingURL}
+        loader={customLoader}
         width={!fill ? width : undefined}
       />
     </picture>
