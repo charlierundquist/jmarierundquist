@@ -60,7 +60,7 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
     const cacheTag = resource.updatedAt
 
     // src = getMediaUrl(url, cacheTag)
-    const utURL = process.env.UPLOADTHING_PROJECT_URL
+    const utURL = process.env.UPLOADTHING_PROJECT_URL || 'https://8khyo0boor.ufs.sh'
     uploadthingURL = `${utURL}/f/${_key}`
   }
 
