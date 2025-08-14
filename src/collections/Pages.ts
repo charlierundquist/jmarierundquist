@@ -10,17 +10,28 @@ import { PraiseDisplay } from '@/app/blocks/PraiseDisplay/config'
 import { ShortContent } from '@/app/blocks/ShortContent/config'
 import { HeroField } from '@/app/components/Hero/config'
 import { linkField } from '@/app/fields/link'
+import { revalidateTag } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
-  versions: {
-    drafts: {
-      autosave: {
-        interval: 1000,
+  hooks: {
+    afterChange: [
+      ({ doc, previousDoc }) => {
+        const docSlug = doc.slug
+        const previousDocSlug = previousDoc.slug
+        revalidateTag(`pages_${docSlug}`)
+        revalidateTag(`pages_${previousDocSlug}`)
       },
-    },
+    ],
   },
+  // versions: {
+  //   drafts: {
+  //     autosave: {
+  //       interval: 1000,
+  //     },
+  //   },
+  // },
   access: {
     read: ({ req }) => {
       if (req.user && req.user.collection === 'users') {

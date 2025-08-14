@@ -8,7 +8,6 @@ type Global = keyof Config['globals']
 
 async function getGlobal<T extends Global>(slug: T, depth = 0): Promise<DataFromGlobalSlug<T>> {
   const payload = await getPayload({ config: configPromise })
-  console.log(slug)
 
   const global = await payload.findGlobal({
     slug,

@@ -33,25 +33,25 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    livePreview: {
-      url: ({ collectionConfig, data }) =>
-        `/${collectionConfig?.slug === 'pages' ? (data.slug !== 'home' ? data.slug : '') : ''}`,
-      collections: ['pages'],
-      breakpoints: [
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 1080,
-        },
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-      ],
-    },
+    // livePreview: {
+    //   url: ({ collectionConfig, data }) =>
+    //     `/${collectionConfig?.slug === 'pages' ? (data.slug !== 'home' ? data.slug : '') : ''}`,
+    //   collections: ['pages'],
+    //   breakpoints: [
+    //     {
+    //       label: 'Desktop',
+    //       name: 'desktop',
+    //       width: 1440,
+    //       height: 1080,
+    //     },
+    //     {
+    //       label: 'Mobile',
+    //       name: 'mobile',
+    //       width: 375,
+    //       height: 667,
+    //     },
+    //   ],
+    // },
   },
   globals: [Header, Footer, SiteDetails],
   collections: [Users, Media, Books, Pages],
