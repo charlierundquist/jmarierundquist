@@ -26,5 +26,5 @@ export function LongContentOneColumnBlock(block: LongContentOneColumn) {
 
   const hasImage = Boolean(block.image)
 
-  return <BlockTemplate content={[contentCol]} shiftTopLineDownLarge></BlockTemplate>
+  return <BlockTemplate content={[contentCol]} shiftTopLineDownLarge={hasImage}></BlockTemplate>
 }

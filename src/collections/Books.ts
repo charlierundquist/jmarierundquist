@@ -12,6 +12,7 @@ export const Books: CollectionConfig = {
       label: 'Cover Image',
       type: 'upload',
       relationTo: 'media',
+      index: true,
     },
     {
       name: 'title',
