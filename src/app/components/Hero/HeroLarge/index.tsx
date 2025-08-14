@@ -11,7 +11,10 @@ export function HeroLarge(props: Page['hero']) {
         style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 20% 100%)' }}
       ></div>
       <div className="mx-auto w-full max-w-(--main-width)">
-        <div className="mx-auto mt-32 max-w-md px-2 sm:mt-56 lg:mr-0">
+        <div
+          className="mx-auto mt-32 max-w-md rounded-sm p-4 px-2 sm:mt-56 lg:mr-0"
+          style={{ background: 'rgba(255, 255, 255, 0.8)' }}
+        >
           <h1 className="mb-1 text-center font-serif text-4xl sm:text-5xl lg:mb-4 lg:text-left">
             {props.header}
           </h1>
