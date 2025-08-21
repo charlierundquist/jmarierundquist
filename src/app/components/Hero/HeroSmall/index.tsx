@@ -12,8 +12,8 @@ export function HeroSmall(props: Page['hero']) {
         imgClassName="object-center"
       ></CMSImage>
       <h1
-        className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 rounded-sm px-8 py-4 text-center font-serif text-4xl"
-        style={{ background: 'rgba(255, 255, 255, 0.8)' }}
+        className="absolute top-1/2 left-1/2 w-fit -translate-x-1/2 -translate-y-1/2 rounded-sm px-8 py-4 text-center font-serif text-4xl backdrop-blur-sm"
+        style={{ background: 'rgba(255, 255, 255, 0.5)' }}
       >
         {props.header}
       </h1>

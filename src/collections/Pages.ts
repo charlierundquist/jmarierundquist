@@ -3,6 +3,7 @@ import { BookShowcase } from '@/app/blocks/BookShowcase/config'
 import { Carousel } from '@/app/blocks/Carousel/config'
 import { ContactForm } from '@/app/blocks/ContactForm/config'
 import { ExtrasDisplay } from '@/app/blocks/ExtrasDisplay/config'
+import { ImageGrid } from '@/app/blocks/ImageGrid/config'
 import { ListGrid } from '@/app/blocks/ListGrid/config'
 import { LongContentOneColumn } from '@/app/blocks/LongContentOneColumn/config'
 import { LongContentTwoColumn } from '@/app/blocks/LongContentTwoColumn/config'
@@ -11,19 +12,24 @@ import { ShortContent } from '@/app/blocks/ShortContent/config'
 import { HeroField } from '@/app/components/Hero/config'
 import { linkField } from '@/app/fields/link'
 import { revalidateTag } from 'next/cache'
-import type { CollectionConfig } from 'payload'
+import type { CollectionAfterChangeHook, CollectionConfig } from 'payload'
+
+export const revalidateFunction: CollectionAfterChangeHook = async ({ doc, previousDoc }) => {
+  try {
+    const docSlug = doc.slug
+    const previousDocSlug = previousDoc.slug
+    revalidateTag(`page_${docSlug}`)
+    revalidateTag(`page_${previousDocSlug}`)
+    console.log(`Revalidated services cache for: ${doc.title}`)
+  } catch (error) {
+    console.error('Error revalidating services cache:', error)
+  }
+}
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   hooks: {
-    afterChange: [
-      ({ doc, previousDoc }) => {
-        const docSlug = doc.slug
-        const previousDocSlug = previousDoc.slug
-        revalidateTag(`pages_${docSlug}`)
-        revalidateTag(`pages_${previousDocSlug}`)
-      },
-    ],
+    afterChange: [revalidateFunction],
   },
   // versions: {
   //   drafts: {
@@ -108,6 +114,7 @@ export const Pages: CollectionConfig = {
                 BookDetails,
                 ListGrid,
                 ContactForm,
+                ImageGrid,
               ],
               label: false,
             },

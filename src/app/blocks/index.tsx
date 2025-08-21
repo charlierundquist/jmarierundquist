@@ -1,4 +1,4 @@
-import { ListGrid, Page } from '@/payload-types'
+import { ImageGrid, ListGrid, Page } from '@/payload-types'
 import { Carousel } from '@/payload-types'
 import { ShortContentBlock } from './ShortContent/Component'
 import { LongContentOneColumnBlock } from './LongContentOneColumn/Component'
@@ -11,6 +11,9 @@ import { BookDetailsBlock } from './BookDetails/Component'
 import { ListGridBlock } from './ListGrid/Component'
 import { ListGridItemBlock } from './ListGrid/ListGridItem/Component'
 import { ContactFormBlock } from './ContactForm/Component'
+import { ImageGridBlock } from './ImageGrid/Component'
+import { ImageLinkBlock } from './ImageGrid/ImageLink/Component'
+import { ImageNoLinkBlock } from './ImageGrid/ImageNoLink/Component'
 
 const blockComponents = {
   'short-content': ShortContentBlock,
@@ -24,10 +27,13 @@ const blockComponents = {
   'list-grid': ListGridBlock,
   'list-grid-item': ListGridItemBlock,
   'contact-form': ContactFormBlock,
+  'image-grid': ImageGridBlock,
+  'image-link': ImageLinkBlock,
+  'image-no-link': ImageNoLinkBlock,
 }
 
 export const RenderBlocks: React.FC<{
-  blocks: Page['pageContent'] | Carousel['blocks'] | ListGrid['items']
+  blocks: Page['pageContent'] | Carousel['blocks'] | ListGrid['items'] | ImageGrid['items']
   className?: string
 }> = (props) => {
   const { blocks } = props

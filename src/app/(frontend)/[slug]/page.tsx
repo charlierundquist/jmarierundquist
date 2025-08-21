@@ -12,6 +12,7 @@ import { RenderHero } from '@/app/components/Hero/RenderHero'
 import { RefreshRouteOnSave } from '../RefreshRouteOnSave'
 import { unstable_cache } from 'next/cache'
 import { getPageCache } from '@/app/utilities/getPage'
+import { blurHashToDataURL } from '@/app/utilities/blurURLGenerator'
 
 type Args = {
   params: Promise<{

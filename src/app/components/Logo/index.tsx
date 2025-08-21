@@ -17,6 +17,13 @@ export async function Logo(props: LogoProps) {
   const details: SiteDetail = await getCachedGlobal('site-details', 1)()
 
   if (typeof details.logoImage === 'object') {
-    return <CMSImage resource={details.logoImage} priority pictureClassName={className}></CMSImage>
+    return (
+      <CMSImage
+        resource={details.logoImage}
+        priority
+        pictureClassName={className}
+        loading="eager"
+      ></CMSImage>
+    )
   }
 }

@@ -2,8 +2,14 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
-    remotePatterns: [new URL(`${process.env.UPLOADTHING_PROJECT_URL}/*`)],
+    // remotePatterns: [new URL(`${process.env.UPLOADTHING_PROJECT_URL}/*`)],
+    localPatterns: [
+      {
+        pathname: '/api/media/file/**',
+      },
+    ],
   },
   distDir: 'dist',
   webpack: (webpackConfig) => {

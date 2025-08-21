@@ -166,8 +166,6 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
-  _key?: string | null;
-  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -181,7 +179,6 @@ export interface Media {
   focalY?: number | null;
   sizes?: {
     thumbnail?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -190,7 +187,6 @@ export interface Media {
       filename?: string | null;
     };
     square?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -199,7 +195,6 @@ export interface Media {
       filename?: string | null;
     };
     small?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -208,7 +203,6 @@ export interface Media {
       filename?: string | null;
     };
     medium?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -217,7 +211,6 @@ export interface Media {
       filename?: string | null;
     };
     large?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -226,7 +219,6 @@ export interface Media {
       filename?: string | null;
     };
     xlarge?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -235,7 +227,6 @@ export interface Media {
       filename?: string | null;
     };
     og?: {
-      _key?: string | null;
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -421,12 +412,12 @@ export interface Page {
         | BookDetails
         | ListGrid
         | ContactForm
+        | ImageGrid
       )[]
     | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -840,6 +831,77 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageGrid".
+ */
+export interface ImageGrid {
+  title?: string | null;
+  subtitle?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  items?: (ImageLink | ImageNoLink)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image-grid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageLink".
+ */
+export interface ImageLink {
+  imageSelect: number | Media;
+  hasHoverInfo?: boolean | null;
+  hoverInfo?: {
+    hoverTitle?: string | null;
+    hoverContent?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  link?: {
+    type?: ('internal' | 'external') | null;
+    newTab?: boolean | null;
+    internalLink?: (number | null) | Page;
+    externalLink?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image-link';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageNoLink".
+ */
+export interface ImageNoLink {
+  imageSelect: number | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image-no-link';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-folders".
  */
 export interface FolderInterface {
@@ -985,8 +1047,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  _key?: T;
-  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1004,7 +1064,6 @@ export interface MediaSelect<T extends boolean = true> {
         thumbnail?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1015,7 +1074,6 @@ export interface MediaSelect<T extends boolean = true> {
         square?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1026,7 +1084,6 @@ export interface MediaSelect<T extends boolean = true> {
         small?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1037,7 +1094,6 @@ export interface MediaSelect<T extends boolean = true> {
         medium?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1048,7 +1104,6 @@ export interface MediaSelect<T extends boolean = true> {
         large?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1059,7 +1114,6 @@ export interface MediaSelect<T extends boolean = true> {
         xlarge?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1070,7 +1124,6 @@ export interface MediaSelect<T extends boolean = true> {
         og?:
           | T
           | {
-              _key?: T;
               url?: T;
               width?: T;
               height?: T;
@@ -1198,11 +1251,11 @@ export interface PagesSelect<T extends boolean = true> {
         'book-details'?: T | BookDetailsSelect<T>;
         'list-grid'?: T | ListGridSelect<T>;
         'contact-form'?: T | ContactFormSelect<T>;
+        'image-grid'?: T | ImageGridSelect<T>;
       };
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1372,6 +1425,55 @@ export interface ContactFormSelect<T extends boolean = true> {
   leadingTitle?: T;
   leadingContent?: T;
   formSelect?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageGrid_select".
+ */
+export interface ImageGridSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  items?:
+    | T
+    | {
+        'image-link'?: T | ImageLinkSelect<T>;
+        'image-no-link'?: T | ImageNoLinkSelect<T>;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageLink_select".
+ */
+export interface ImageLinkSelect<T extends boolean = true> {
+  imageSelect?: T;
+  hasHoverInfo?: T;
+  hoverInfo?:
+    | T
+    | {
+        hoverTitle?: T;
+        hoverContent?: T;
+      };
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        internalLink?: T;
+        externalLink?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageNoLink_select".
+ */
+export interface ImageNoLinkSelect<T extends boolean = true> {
+  imageSelect?: T;
   id?: T;
   blockName?: T;
 }

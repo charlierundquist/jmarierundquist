@@ -1,7 +1,7 @@
 // storage-adapter-import-placeholder
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { postgresAdapter } from '@payloadcms/db-postgres'
-import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
+// import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -60,16 +60,16 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  // db: sqliteAdapter({
-  //   client: {
-  //     url: process.env.DATABASE_URI || '',
-  //   },
-  // }),
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
+  db: sqliteAdapter({
+    client: {
+      url: process.env.DATABASE_URI || '',
     },
   }),
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI || '',
+  //   },
+  // }),
   sharp,
   email: resendAdapter({
     defaultFromAddress: 'charlie@charlierundquist.com',
@@ -90,21 +90,21 @@ export default buildConfig({
         },
       },
     }),
-    uploadthingStorage({
-      collections: {
-        media: {
-          disablePayloadAccessControl: true,
-          generateFileURL({ collection, filename }) {
-            const origin = process.env.UPLOADTHING_PROJECT_URL
-            const key = getKeyFromFilename(collection, filename)
-            return `${origin}/f/${key}`
-          },
-        },
-      },
-      options: {
-        token: process.env.UPLOADTHING_TOKEN || '',
-      },
-    }),
+    // uploadthingStorage({
+    //   collections: {
+    //     media: {
+    //       disablePayloadAccessControl: true,
+    //       generateFileURL({ collection, filename }) {
+    //         const origin = process.env.UPLOADTHING_PROJECT_URL
+    //         const key = getKeyFromFilename(collection, filename)
+    //         return `${origin}/f/${key}`
+    //       },
+    //     },
+    //   },
+    //   options: {
+    //     token: process.env.UPLOADTHING_TOKEN || '',
+    //   },
+    // }),
   ],
   // onInit: async (payload) => {
   //   await payload.update({

@@ -12,19 +12,17 @@ export function HeroLarge(props: Page['hero']) {
       ></div>
       <div className="mx-auto w-full max-w-(--main-width)">
         <div
-          className="mx-auto mt-32 max-w-md rounded-sm p-4 px-2 sm:mt-56 lg:mr-0"
+          className="mx-auto mt-32 max-w-md rounded-sm px-4 py-6 backdrop-blur-sm sm:mt-56 lg:mr-0 lg:p-0"
           style={{ background: 'rgba(255, 255, 255, 0.8)' }}
         >
-          <h1 className="mb-1 text-center font-serif text-4xl sm:text-5xl lg:mb-4 lg:text-left">
-            {props.header}
-          </h1>
+          <h1 className="mb-4 text-center font-serif text-5xl lg:text-left">{props.header}</h1>
           {props.subheader && (
             <RichText
               data={props.subheader}
               className="text-center text-lg text-balance lg:text-left"
             ></RichText>
           )}
-          <div className="mt-4 flex flex-wrap justify-center gap-4 sm:justify-normal">
+          <div className="mt-4 flex flex-wrap justify-center gap-4 lg:justify-normal">
             {props.links?.map((obj, i) => {
               return (
                 <CMSLink

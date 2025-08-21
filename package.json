@@ -37,6 +37,7 @@
     "@payloadcms/storage-uploadthing": "3.46.0",
     "@payloadcms/ui": "3.46.0",
     "@tailwindcss/postcss": "^4.1.11",
+    "blurhash": "^2.0.5",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",

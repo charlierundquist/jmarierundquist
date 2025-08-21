@@ -4,6 +4,7 @@
   --color-pink: hsl(319, 38%, 85%);
   --color-green: hsl(148, 47%, 84%);
   --color-lightgreen: hsl(148, 30%, 96%);
+  --color-lightgreen-transparent: hsla(148, 30%, 96%, 0.5);
 
   --main-width: var(--container-6xl)
 }
