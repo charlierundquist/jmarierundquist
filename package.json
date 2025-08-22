@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@deemlol/next-icons": "^0.1.9",
+    "@libsql/client": "^0.15.12",
     "@payloadcms/db-postgres": "3.46.0",
     "@payloadcms/db-sqlite": "3.46.0",
     "@payloadcms/email-resend": "3.46.0",
@@ -41,6 +42,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
+    "libsql": "^0.5.17",
     "motion": "^12.23.12",
     "next": "15.3.2",
     "payload": "3.46.0",
