@@ -25,6 +25,7 @@
   "dependencies": {
     "@deemlol/next-icons": "^0.1.9",
     "@libsql/client": "^0.15.12",
+    "@libsql/linux-x64-musl": "^0.5.17",
     "@payloadcms/db-postgres": "3.46.0",
     "@payloadcms/db-sqlite": "3.46.0",
     "@payloadcms/email-resend": "3.46.0",

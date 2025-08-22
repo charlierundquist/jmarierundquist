@@ -14,6 +14,9 @@ importers:
       '@libsql/client':
         specifier: ^0.15.12
         version: 0.15.12
+      '@libsql/linux-x64-musl':
+        specifier: ^0.5.17
+        version: 0.5.17
       '@payloadcms/db-postgres':
         specifier: 3.46.0
         version: 3.46.0(@libsql/client@0.15.12)(payload@3.46.0(graphql@16.11.0)(typescript@5.7.3))
@@ -6858,8 +6861,7 @@ snapshots:
   '@libsql/linux-x64-musl@0.4.7':
     optional: true
 
-  '@libsql/linux-x64-musl@0.5.17':
-    optional: true
+  '@libsql/linux-x64-musl@0.5.17': {}
 
   '@libsql/win32-x64-msvc@0.4.7':
     optional: true

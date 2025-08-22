@@ -11,7 +11,6 @@ const nextConfig = {
       },
     ],
   },
-  distDir: 'dist',
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
