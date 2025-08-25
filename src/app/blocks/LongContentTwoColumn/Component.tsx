@@ -1,8 +1,6 @@
 import { LongContentTwoColumn } from '@/payload-types'
 import { BlockTemplate, ColumnContent } from '../BlockTemplate'
-import { CMSImage } from '@/app/components/CMSImage'
 import { RichText } from '@/app/components/RichText'
-import { CMSLink } from '@/app/components/CMSLink'
 import { DisplayLinks } from '@/app/components/CMSLink/DisplayLinks'
 
 export function LongContentTwoColumnBlock(block: LongContentTwoColumn) {

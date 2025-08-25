@@ -1,4 +1,3 @@
-import { linkField } from '@/app/fields/link'
 import { Block } from 'payload'
 
 export const ImageNoLink: Block = {

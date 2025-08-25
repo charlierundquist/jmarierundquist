@@ -1,6 +1,5 @@
 import { LongContentOneColumn } from '@/payload-types'
 import { BlockTemplate, ColumnContent } from '../BlockTemplate'
-import { CMSLink } from '@/app/components/CMSLink'
 import { RichText } from '@/app/components/RichText'
 import { CMSImage } from '@/app/components/CMSImage'
 import { DisplayLinks } from '@/app/components/CMSLink/DisplayLinks'

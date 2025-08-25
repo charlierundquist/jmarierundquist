@@ -6,7 +6,6 @@ import React from 'react'
 
 import type { Props as MediaProps } from './types'
 
-import { getMediaUrl } from '@utilities/getMediaURL'
 import { cssVariables } from '@/app/utilities/cssVariables'
 
 const { breakpoints } = cssVariables
@@ -34,8 +33,6 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
   let height: number | undefined
   let alt = altFromProps
   let src: StaticImageData | string = srcFromProps || ''
-  let focalX: number = 0
-  let focalY: number = 0
   // let uploadthingURL = ''
 
   if (!src && resource && typeof resource === 'object') {
@@ -45,21 +42,15 @@ export const CMSImage: React.FC<MediaProps> = (props) => {
       url,
       // _key,
       width: fullWidth,
-      focalX: focalPointX,
-      focalY: focalPointY,
+      // focalX: focalPointX,
+      // focalY: focalPointY,
     } = resource
 
     width = fullWidth!
     height = fullHeight!
     alt = altFromResource || ''
-    if (focalPointX) {
-      focalX = focalPointX
-    }
-    if (focalPointY) {
-      focalY = focalPointY
-    }
 
-    const cacheTag = resource.updatedAt
+    // const cacheTag = resource.updatedAt
 
     // src = getMediaUrl(url, cacheTag)
     // const utURL = process.env.UPLOADTHING_PROJECT_URL || 'https://8khyo0boor.ufs.sh'

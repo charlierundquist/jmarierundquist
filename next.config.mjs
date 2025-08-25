@@ -2,7 +2,10 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'standalone',
+  output: 'standalone',
+  outputFileTracingIncludes: {
+    './**/*': ['./node_modules/@libsql/darwin*/**/*', './node_modules/@libsql/linux*/**/*'],
+  },
   images: {
     // remotePatterns: [new URL(`${process.env.UPLOADTHING_PROJECT_URL}/*`)],
     localPatterns: [

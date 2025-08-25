@@ -1,7 +1,6 @@
-import { RichText } from '@/app/components/RichText'
 import { PraiseDisplay } from '@/payload-types'
 import { BlockTemplate, ColumnContent } from '../BlockTemplate'
-import { CMSLink, LinkType } from '@/app/components/CMSLink'
+import { LinkType } from '@/app/components/CMSLink'
 import { DisplayLinks } from '@/app/components/CMSLink/DisplayLinks'
 import { Quote } from '@/app/components/Quote'
 
@@ -14,7 +13,7 @@ export function PraiseDisplayBlock(block: PraiseDisplay) {
   const directSaleLink = book.links?.directSalePage
   const retailersLink = book.links?.retailersPage
 
-  let links: { link: LinkType }[] = []
+  const links: { link: LinkType }[] = []
 
   if (typeof directSaleLink != 'undefined' && directSaleLink.linkText) {
     links.push({ link: directSaleLink })
@@ -23,7 +22,7 @@ export function PraiseDisplayBlock(block: PraiseDisplay) {
     links.push({ link: retailersLink })
   }
 
-  let praise = book.praise
+  const praise = book.praise
 
   const contentCol: ColumnContent = {
     type: 'text',

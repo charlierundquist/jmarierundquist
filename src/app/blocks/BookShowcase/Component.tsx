@@ -2,10 +2,8 @@ import { BookShowcase } from '@/payload-types'
 import { BlockTemplate, ColumnContent } from '../BlockTemplate'
 import { RichText } from '@/app/components/RichText'
 import { DisplayLinks } from '@/app/components/CMSLink/DisplayLinks'
-import { CMSImage } from '@/app/components/CMSImage'
 import { Quote } from '@/app/components/Quote'
 import { LinkType } from '@/app/components/CMSLink'
-import { BookAlert } from '@/app/components/BookAlert'
 
 export function BookShowcaseBlock(block: BookShowcase) {
   const imagePos = block.imageLocation
@@ -17,7 +15,7 @@ export function BookShowcaseBlock(block: BookShowcase) {
   const directSaleLink = book.links?.directSalePage
   const retailersLink = book.links?.retailersPage
 
-  let links: { link: LinkType }[] = []
+  const links: { link: LinkType }[] = []
 
   if (typeof directSaleLink != 'undefined' && directSaleLink.linkText) {
     links.push({ link: directSaleLink })

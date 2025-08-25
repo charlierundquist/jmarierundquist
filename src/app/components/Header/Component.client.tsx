@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { CMSLink } from '../CMSLink'
 import { Menu, X } from '@deemlol/next-icons'
 import React, { useEffect, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 interface HeaderClientProps {
   data: Header
@@ -12,21 +12,10 @@ interface HeaderClientProps {
 }
 
 export const HeaderClient: React.FC<HeaderClientProps> = ({ data, children }) => {
-  const router = useRouter()
   const pathName = usePathname()
-  const [windowSize, setWindowSize] = useState(0)
   const [mobileMenuShowing, setMobileMenuShowing] = useState(false)
 
   const links = data.links
-
-  useEffect(() => {
-    setWindowSize(window.innerWidth)
-
-    window.addEventListener('resize', () => {
-      setWindowSize(window.innerWidth)
-      setMobileMenuShowing(false)
-    })
-  })
 
   useEffect(() => {
     setMobileMenuShowing(false)

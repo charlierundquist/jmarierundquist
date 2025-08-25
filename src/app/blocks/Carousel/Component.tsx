@@ -4,7 +4,7 @@ import { Carousel } from '@/payload-types'
 import { Circle } from '@deemlol/next-icons'
 import { ArrowLeft } from '@/app/components/CustomIcons/ArrowLeft'
 import { ArrowRight } from '@/app/components/CustomIcons/ArrowRight'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ShortContentBlock } from '../ShortContent/Component'
 import { BookShowcaseBlock } from '../BookShowcase/Component'
 import { PraiseDisplayBlock } from '../PraiseDisplay/Component'
@@ -39,7 +39,7 @@ export const RenderCarouselBlocks: React.FC<{
                   key={index}
                   className={`${props.className || ''} ${props.slideShowing === index ? 'opacity-100' : 'invisible opacity-0'} transition-all transition-discrete duration-100`}
                 >
-                  {/* @ts-expect-error */}
+                  {/* @ts-expect-error Block type doesn't show up automatically */}
                   <Block {...block}></Block>
                 </div>
               )
@@ -79,22 +79,27 @@ export function CarouselBlock(block: Carousel) {
     setSlideShowing(slideShowing + 1)
   }
 
-  let interval: NodeJS.Timeout
+  const interval = useRef(
+    setTimeout(() => {
+      return null
+    }, 0),
+  )
   const timing = (block.autoscrollSpeed || 4) * 1000
 
   useEffect(() => {
     if (autoscrolling) {
-      interval = setTimeout(() => {
+      interval.current = setTimeout(() => {
         if (autoscrolling) incrementSlideUp()
       }, timing)
     }
+    // eslint-disable-next-line
   }, [slideShowing])
 
   useEffect(() => {
     const keyDownHandler = (e: KeyboardEvent) => {
       if (e.code === 'Tab') {
         setAutoscrolling(false)
-        clearTimeout(interval)
+        clearTimeout(interval.current)
       }
     }
     document.addEventListener('keydown', keyDownHandler)

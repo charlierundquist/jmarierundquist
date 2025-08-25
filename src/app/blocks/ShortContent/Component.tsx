@@ -1,6 +1,5 @@
 import { ShortContent } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { CMSImage } from '@/app/components/CMSImage'
 import { BlockTemplate, ColumnContent } from '../BlockTemplate'
 import { DisplayLinks } from '@/app/components/CMSLink/DisplayLinks'
 

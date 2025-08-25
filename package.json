@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@deemlol/next-icons": "^0.1.9",
+    "@eslint/eslintrc": "^3.3.1",
     "@libsql/client": "^0.15.12",
     "@libsql/linux-x64-musl": "^0.5.17",
     "@payloadcms/db-postgres": "3.46.0",
@@ -49,6 +50,7 @@
     "payload": "3.46.0",
     "postcss": "^8.5.6",
     "react": "19.1.0",
+    "react-dom": "19.1.0",
     "resend": "^4.8.0",
     "sharp": "0.34.2",
     "tailwindcss": "^4.1.11"
@@ -71,9 +73,12 @@
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.3"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-musl": "4.9.5"
+  },
   "engines": {
-    "node": "^18.20.2 || >=20.9.0",
-    "pnpm": "^9 || ^10"
+    "node": "22.14.0",
+    "pnpm": "10.12.4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

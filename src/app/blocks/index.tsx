@@ -52,7 +52,7 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div key={index} className={props.className || ''}>
-                  {/* @ts-expect-error */}
+                  {/* @ts-expect-error Block types not automatically generated */}
                   <Block {...block}></Block>
                 </div>
               )

@@ -9,10 +9,7 @@ interface LogoProps {
 }
 
 export async function Logo(props: LogoProps) {
-  const { loading: loadingFromProps, priority: priorityFromProps, className } = props
-
-  const loading = loadingFromProps || 'lazy'
-  const priority = priorityFromProps || 'low'
+  const { className } = props
 
   const details: SiteDetail = await getCachedGlobal('site-details', 1)()
 

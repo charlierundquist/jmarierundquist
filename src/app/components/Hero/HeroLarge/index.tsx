@@ -1,4 +1,4 @@
-import { Media, Page } from '@/payload-types'
+import { Page } from '@/payload-types'
 import { CMSImage } from '../../CMSImage'
 import { RichText } from '../../RichText'
 import { CMSLink } from '../../CMSLink'

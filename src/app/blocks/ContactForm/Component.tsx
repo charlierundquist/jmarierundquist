@@ -15,8 +15,6 @@ export function ContactFormBlock(block: ContactForm) {
   if (!form) return null
   if (typeof form === 'number') return null
 
-  const emails = form.emails
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
@@ -51,6 +49,7 @@ export function ContactFormBlock(block: ContactForm) {
       <form className="grid grow grid-cols-1 gap-4" onSubmit={handleSubmit} ref={ref}>
         <h2 className="text-center lg:text-left">{form.title}</h2>
         {/* <hr className="my-2" /> */}
+        {/* eslint-disable-next-line */}
         {form.fields?.map((field: any, i) => {
           return (
             <div key={i} className="grid grid-cols-1 gap-1">

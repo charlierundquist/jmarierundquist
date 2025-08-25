@@ -10,7 +10,6 @@ import { LongContentTwoColumn } from '@/app/blocks/LongContentTwoColumn/config'
 import { PraiseDisplay } from '@/app/blocks/PraiseDisplay/config'
 import { ShortContent } from '@/app/blocks/ShortContent/config'
 import { HeroField } from '@/app/components/Hero/config'
-import { linkField } from '@/app/fields/link'
 import { revalidateTag } from 'next/cache'
 import type { CollectionAfterChangeHook, CollectionConfig } from 'payload'
 

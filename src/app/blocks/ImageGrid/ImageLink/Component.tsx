@@ -19,9 +19,9 @@ export function ImageLinkBlock(block: ImageLink) {
 
   let href = ''
 
-  if (link.type === 'external') {
-    href = sanitizeLink(link.externalLink || '')
-  } else if (link.type === 'internal' && typeof internalPage === 'object') {
+  if (type === 'external') {
+    href = sanitizeLink(externalPage || '')
+  } else if (type === 'internal' && typeof internalPage === 'object') {
     const { slug } = internalPage
     href = '/' + slug
   } else {
@@ -51,7 +51,7 @@ export function ImageLinkBlock(block: ImageLink) {
   return (
     <Link
       href={href}
-      target={Boolean(link.newTab) ? '_blank' : ''}
+      target={Boolean(newTab) ? '_blank' : ''}
       className="block transition-transform duration-200 focus-within:-translate-y-0.5 hover:-translate-y-0.5 focus:-translate-y-0.5 focus-visible:-translate-y-0.5"
     >
       <CMSImage resource={image}></CMSImage>

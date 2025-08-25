@@ -36,7 +36,7 @@ export const HeroField: Field = {
       name: 'subheader',
       type: 'richText',
       admin: {
-        condition: (data, siblingData, { user }) => {
+        condition: (data, siblingData) => {
           if (siblingData.size === 'large') return true
 
           return false
@@ -49,7 +49,7 @@ export const HeroField: Field = {
       fields: [linkField()],
       maxRows: 2,
       admin: {
-        condition: (data, siblingData, { user }) => {
+        condition: (data, siblingData) => {
           if (siblingData.size === 'large') return true
 
           return false

@@ -12,7 +12,7 @@ export function BookDetailsBlock(block: BookDetails) {
   const book = block.bookSelect
   const directSaleLink = book.links?.directSalePage
   const retailersLink = book.links?.retailersPage
-  let links: { link: LinkType }[] = []
+  const links: { link: LinkType }[] = []
   if (typeof directSaleLink != 'undefined' && directSaleLink.linkText) {
     links.push({ link: directSaleLink })
   }
