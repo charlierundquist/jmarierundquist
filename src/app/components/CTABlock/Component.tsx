@@ -21,9 +21,18 @@ export async function CTABlock() {
         {ctaBlock.ctaSubtitle && (
           <RichText data={ctaBlock.ctaSubtitle} className="text-center text-balance" />
         )}
-        {ctaBlock.ctaLinks && (
+        {/* {ctaBlock.ctaLinks && (
           <DisplayLinks links={ctaBlock.ctaLinks} className="justify-center"></DisplayLinks>
-        )}
+        )} */}
+        <button
+          className={`ml-onclick-form cmslink focus-visible:-translate-y-0.5' bg-pink w-fit rounded-full px-4 py-1 transition-transform duration-200 hover:-translate-y-0.5 focus:-translate-y-0.5`}
+          onClick={() => {
+            // @ts-expect-error mailerlite
+            ml('show', 'BDr1cA', true)
+          }}
+        >
+          Subscribe
+        </button>
       </>
     ),
   }

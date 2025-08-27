@@ -25,6 +25,13 @@
     },
     "target": "ES2022"
   },
-  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts", "dist/types/**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next-env.d.ts",
+    "dist/types/**/*.ts",
+    "src/app/utilities/mailerLite.js"
+  ],
   "exclude": ["node_modules"]
 }
