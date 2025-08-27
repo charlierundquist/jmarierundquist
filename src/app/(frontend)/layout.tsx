@@ -4,7 +4,6 @@ import { Header } from '../components/Header/Component'
 import { Footer } from '../components/Footer/Component'
 import { Noto_Sans, Noto_Serif } from 'next/font/google'
 import { CTABlock } from '../components/CTABlock/Component'
-import Script from 'next/script'
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -27,9 +26,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en" className={`${notoSans.variable} ${notoSerif.variable}`}>
-      <head>
-        <Script src="@utilities/mailerLite.js"></Script>
-      </head>
       <body suppressHydrationWarning>
         <Header></Header>
         <main>{children}</main>
