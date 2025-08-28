@@ -20,7 +20,7 @@ type Review = {
     [k: string]: unknown
   } | null
   reviewerWebsite?: {
-    type?: ('internal' | 'external') | null
+    type?: ('internal' | 'external' | 'media') | null
     newTab?: boolean | null
     internalLink?: (number | null) | Page
     externalLink?: string | null
