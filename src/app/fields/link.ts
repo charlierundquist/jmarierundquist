@@ -34,6 +34,10 @@ export const linkField: linkFieldType = ({ disableLabel = false, overrides = {} 
                 label: 'Custom URL',
                 value: 'external',
               },
+              {
+                label: 'Media',
+                value: 'media',
+              },
             ],
           },
           {
@@ -62,6 +66,15 @@ export const linkField: linkFieldType = ({ disableLabel = false, overrides = {} 
             type: 'text',
             admin: {
               condition: (_, siblingData) => siblingData.type === 'external',
+            },
+          },
+          {
+            name: 'mediaLink',
+            label: 'Media to link to',
+            type: 'relationship',
+            relationTo: 'media',
+            admin: {
+              condition: (_, siblingData) => siblingData.type === 'media',
             },
           },
         ],

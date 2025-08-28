@@ -1,13 +1,14 @@
 import { sanitizeLink } from '@/app/utilities/sanitizeLink'
-import { Page } from '@/payload-types'
+import { Media, Page } from '@/payload-types'
 import Link from 'next/link'
 import React from 'react'
 
 export type LinkType = {
-  type?: 'internal' | 'external' | null | undefined
+  type?: 'internal' | 'external' | 'media' | null | undefined
   newTab?: boolean | null
   internalLink?: (number | null) | Page
   externalLink?: string | null
+  mediaLink?: Media | number | null | undefined
   linkText?: string | null | undefined
   className?: string
   isButton?: boolean
@@ -18,6 +19,7 @@ export function CMSLink(props: LinkType) {
   const { type, className } = props
   const internalPage = props?.internalLink || { slug: 'home' }
   const externalPage = props?.externalLink || '/'
+  const mediaLink = props?.mediaLink
   const linkText = props?.linkText
   const newTab = props.newTab || false
 
@@ -28,6 +30,12 @@ export function CMSLink(props: LinkType) {
   } else if (type === 'internal' && typeof internalPage === 'object') {
     const { slug } = internalPage
     href = '/' + slug
+  } else if (
+    type === 'media' &&
+    typeof mediaLink === 'object' &&
+    typeof mediaLink?.url === 'string'
+  ) {
+    href = mediaLink.url
   } else {
     href = '/'
   }

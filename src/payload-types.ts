@@ -295,10 +295,11 @@ export interface Book {
           [k: string]: unknown;
         } | null;
         reviewerWebsite?: {
-          type?: ('internal' | 'external') | null;
+          type?: ('internal' | 'external' | 'media') | null;
           newTab?: boolean | null;
           internalLink?: (number | null) | Page;
           externalLink?: string | null;
+          mediaLink?: (number | null) | Media;
         };
         review?: {
           root: {
@@ -321,10 +322,11 @@ export interface Book {
   extras?:
     | {
         link?: {
-          type?: ('internal' | 'external') | null;
+          type?: ('internal' | 'external' | 'media') | null;
           newTab?: boolean | null;
           internalLink?: (number | null) | Page;
           externalLink?: string | null;
+          mediaLink?: (number | null) | Media;
           linkText?: string | null;
         };
         extraDescription?: string | null;
@@ -336,24 +338,27 @@ export interface Book {
    */
   links?: {
     aboutPage?: {
-      type?: ('internal' | 'external') | null;
+      type?: ('internal' | 'external' | 'media') | null;
       newTab?: boolean | null;
       internalLink?: (number | null) | Page;
       externalLink?: string | null;
+      mediaLink?: (number | null) | Media;
       linkText?: string | null;
     };
     directSalePage?: {
-      type?: ('internal' | 'external') | null;
+      type?: ('internal' | 'external' | 'media') | null;
       newTab?: boolean | null;
       internalLink?: (number | null) | Page;
       externalLink?: string | null;
+      mediaLink?: (number | null) | Media;
       linkText?: string | null;
     };
     retailersPage?: {
-      type?: ('internal' | 'external') | null;
+      type?: ('internal' | 'external' | 'media') | null;
       newTab?: boolean | null;
       internalLink?: (number | null) | Page;
       externalLink?: string | null;
+      mediaLink?: (number | null) | Media;
       linkText?: string | null;
     };
   };
@@ -390,10 +395,11 @@ export interface Page {
     links?:
       | {
           link?: {
-            type?: ('internal' | 'external') | null;
+            type?: ('internal' | 'external' | 'media') | null;
             newTab?: boolean | null;
             internalLink?: (number | null) | Page;
             externalLink?: string | null;
+            mediaLink?: (number | null) | Media;
             linkText?: string | null;
           };
           id?: string | null;
@@ -445,10 +451,11 @@ export interface ShortContent {
   links?:
     | {
         link?: {
-          type?: ('internal' | 'external') | null;
+          type?: ('internal' | 'external' | 'media') | null;
           newTab?: boolean | null;
           internalLink?: (number | null) | Page;
           externalLink?: string | null;
+          mediaLink?: (number | null) | Media;
           linkText?: string | null;
         };
         id?: string | null;
@@ -485,10 +492,11 @@ export interface LongContentOneColumn {
   links?:
     | {
         link?: {
-          type?: ('internal' | 'external') | null;
+          type?: ('internal' | 'external' | 'media') | null;
           newTab?: boolean | null;
           internalLink?: (number | null) | Page;
           externalLink?: string | null;
+          mediaLink?: (number | null) | Media;
           linkText?: string | null;
         };
         id?: string | null;
@@ -525,10 +533,11 @@ export interface LongContentTwoColumn {
   links?:
     | {
         link?: {
-          type?: ('internal' | 'external') | null;
+          type?: ('internal' | 'external' | 'media') | null;
           newTab?: boolean | null;
           internalLink?: (number | null) | Page;
           externalLink?: string | null;
+          mediaLink?: (number | null) | Media;
           linkText?: string | null;
         };
         id?: string | null;
@@ -881,10 +890,11 @@ export interface ImageLink {
     } | null;
   };
   link?: {
-    type?: ('internal' | 'external') | null;
+    type?: ('internal' | 'external' | 'media') | null;
     newTab?: boolean | null;
     internalLink?: (number | null) | Page;
     externalLink?: string | null;
+    mediaLink?: (number | null) | Media;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1156,6 +1166,7 @@ export interface BooksSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
             };
         review?: T;
         id?: T;
@@ -1170,6 +1181,7 @@ export interface BooksSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         extraDescription?: T;
@@ -1185,6 +1197,7 @@ export interface BooksSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         directSalePage?:
@@ -1194,6 +1207,7 @@ export interface BooksSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         retailersPage?:
@@ -1203,6 +1217,7 @@ export interface BooksSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
       };
@@ -1233,6 +1248,7 @@ export interface PagesSelect<T extends boolean = true> {
                     newTab?: T;
                     internalLink?: T;
                     externalLink?: T;
+                    mediaLink?: T;
                     linkText?: T;
                   };
               id?: T;
@@ -1276,6 +1292,7 @@ export interface ShortContentSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         id?: T;
@@ -1303,6 +1320,7 @@ export interface LongContentOneColumnSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         id?: T;
@@ -1330,6 +1348,7 @@ export interface LongContentTwoColumnSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         id?: T;
@@ -1464,6 +1483,7 @@ export interface ImageLinkSelect<T extends boolean = true> {
         newTab?: T;
         internalLink?: T;
         externalLink?: T;
+        mediaLink?: T;
       };
   id?: T;
   blockName?: T;
@@ -1678,20 +1698,22 @@ export interface Header {
   links?:
     | {
         link?: {
-          type?: ('internal' | 'external') | null;
+          type?: ('internal' | 'external' | 'media') | null;
           newTab?: boolean | null;
           internalLink?: (number | null) | Page;
           externalLink?: string | null;
+          mediaLink?: (number | null) | Media;
           linkText?: string | null;
         };
         hasDropdown?: boolean | null;
         dropdownLinks?:
           | {
               link?: {
-                type?: ('internal' | 'external') | null;
+                type?: ('internal' | 'external' | 'media') | null;
                 newTab?: boolean | null;
                 internalLink?: (number | null) | Page;
                 externalLink?: string | null;
+                mediaLink?: (number | null) | Media;
                 linkText?: string | null;
               };
               id?: string | null;
@@ -1714,10 +1736,11 @@ export interface Footer {
     customLinks?:
       | {
           link?: {
-            type?: ('internal' | 'external') | null;
+            type?: ('internal' | 'external' | 'media') | null;
             newTab?: boolean | null;
             internalLink?: (number | null) | Page;
             externalLink?: string | null;
+            mediaLink?: (number | null) | Media;
             linkText?: string | null;
           };
           id?: string | null;
@@ -1725,10 +1748,11 @@ export interface Footer {
       | null;
   };
   link?: {
-    type?: ('internal' | 'external') | null;
+    type?: ('internal' | 'external' | 'media') | null;
     newTab?: boolean | null;
     internalLink?: (number | null) | Page;
     externalLink?: string | null;
+    mediaLink?: (number | null) | Media;
     linkText?: string | null;
   };
   extraInfo?: {
@@ -1799,10 +1823,11 @@ export interface SiteDetail {
     ctaLinks?:
       | {
           link?: {
-            type?: ('internal' | 'external') | null;
+            type?: ('internal' | 'external' | 'media') | null;
             newTab?: boolean | null;
             internalLink?: (number | null) | Page;
             externalLink?: string | null;
+            mediaLink?: (number | null) | Media;
             linkText?: string | null;
           };
           id?: string | null;
@@ -1827,6 +1852,7 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
               internalLink?: T;
               externalLink?: T;
+              mediaLink?: T;
               linkText?: T;
             };
         hasDropdown?: T;
@@ -1840,6 +1866,7 @@ export interface HeaderSelect<T extends boolean = true> {
                     newTab?: T;
                     internalLink?: T;
                     externalLink?: T;
+                    mediaLink?: T;
                     linkText?: T;
                   };
               id?: T;
@@ -1869,6 +1896,7 @@ export interface FooterSelect<T extends boolean = true> {
                     newTab?: T;
                     internalLink?: T;
                     externalLink?: T;
+                    mediaLink?: T;
                     linkText?: T;
                   };
               id?: T;
@@ -1881,6 +1909,7 @@ export interface FooterSelect<T extends boolean = true> {
         newTab?: T;
         internalLink?: T;
         externalLink?: T;
+        mediaLink?: T;
         linkText?: T;
       };
   extraInfo?: T;
@@ -1918,6 +1947,7 @@ export interface SiteDetailsSelect<T extends boolean = true> {
                     newTab?: T;
                     internalLink?: T;
                     externalLink?: T;
+                    mediaLink?: T;
                     linkText?: T;
                   };
               id?: T;
