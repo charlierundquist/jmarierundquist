@@ -1,5 +1,4 @@
 'use client'
-import { BlockTemplate, ColumnContent } from '@/app/blocks/BlockTemplate'
 import { RichText } from '@/app/components/RichText'
 import { MailerLiteSubscribe } from '@/payload-types'
 import { X } from '@deemlol/next-icons'
@@ -18,6 +17,25 @@ export function MailerLitePopupClient(props: Props) {
   const [loadingShowing, setLoadingShowing] = useState(false)
 
   const [popupShowing, setPopupShowing] = useState(false)
+  const modalRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    if (!hasCookie('subscribe_popup_recent')) {
+      setCookie('subscribe_popup_recent', new Date(), {
+        maxAge: reappearDelay * 60,
+        sameSite: 'lax',
+      })
+
+      setTimeout(() => {
+        openModal(modalRef.current, true)
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            setPopupShowing(false)
+          }
+        })
+      }, 2000)
+    }
+  }, [])
 
   const formRef = useRef<HTMLFormElement>(null)
   const errorMessage = 'Failed to subscribe. Please try again.'
@@ -80,8 +98,6 @@ export function MailerLitePopupClient(props: Props) {
   const subtitle = content?.subtitle || ''
   const confirmationMessage = content?.confirmationMessage || ''
 
-  const modalRef = useRef<HTMLDialogElement>(null)
-
   const openModal = (obj: HTMLDialogElement | null, isModal: boolean) => {
     if (isModal) {
       obj?.showModal()
@@ -95,24 +111,6 @@ export function MailerLitePopupClient(props: Props) {
     obj?.close()
     setPopupShowing(false)
   }
-
-  useEffect(() => {
-    if (!hasCookie('subscribe_popup_recent')) {
-      setCookie('subscribe_popup_recent', new Date(), {
-        maxAge: reappearDelay * 60,
-        sameSite: 'lax',
-      })
-
-      setTimeout(() => {
-        openModal(modalRef.current, true)
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            setPopupShowing(false)
-          }
-        })
-      }, 2000)
-    }
-  }, [])
 
   return (
     <dialog

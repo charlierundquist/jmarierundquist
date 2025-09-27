@@ -92,7 +92,6 @@ export function CarouselBlock(block: Carousel) {
         if (autoscrolling) incrementSlideUp()
       }, timing)
     }
-    // eslint-disable-next-line
   }, [slideShowing])
 
   useEffect(() => {
