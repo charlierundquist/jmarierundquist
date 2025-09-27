@@ -14,6 +14,7 @@ import { ContactFormBlock } from './ContactForm/Component'
 import { ImageGridBlock } from './ImageGrid/Component'
 import { ImageLinkBlock } from './ImageGrid/ImageLink/Component'
 import { ImageNoLinkBlock } from './ImageGrid/ImageNoLink/Component'
+import { MailerLiteSubscribeBlock } from './MailerLiteSubscribe/Component'
 
 const blockComponents = {
   'short-content': ShortContentBlock,
@@ -30,6 +31,7 @@ const blockComponents = {
   'image-grid': ImageGridBlock,
   'image-link': ImageLinkBlock,
   'image-no-link': ImageNoLinkBlock,
+  'mailer-lite-subscribe': MailerLiteSubscribeBlock,
 }
 
 export const RenderBlocks: React.FC<{

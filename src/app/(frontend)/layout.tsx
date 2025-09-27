@@ -3,7 +3,7 @@ import './styles.css'
 import { Header } from '../components/Header/Component'
 import { Footer } from '../components/Footer/Component'
 import { Noto_Sans, Noto_Serif } from 'next/font/google'
-import { CTABlock } from '../components/CTABlock/Component'
+// import { CTABlock } from '../components/CTABlock/Component'
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -29,7 +29,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body suppressHydrationWarning>
         <Header></Header>
         <main>{children}</main>
-        <CTABlock></CTABlock>
+        {/* <CTABlock></CTABlock> */}
         <Footer></Footer>
       </body>
     </html>

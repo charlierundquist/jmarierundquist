@@ -5,6 +5,8 @@ import '../styles.css'
 import { RenderBlocks } from '@/app/blocks'
 import { RenderHero } from '@/app/components/Hero/RenderHero'
 import { getPageCache } from '@/app/utilities/getPage'
+import { CTABlock } from '@/app/components/CTABlock/Component'
+import { MailerLitePopup } from '@/app/components/MailerLitePopup/Component'
 
 type Args = {
   params: Promise<{
@@ -27,6 +29,12 @@ export default async function Page({ params: paramsPromise }: Args) {
     <>
       <RenderHero {...page.hero}></RenderHero>
       <RenderBlocks blocks={page.pageContent}></RenderBlocks>
+      <MailerLitePopup></MailerLitePopup>
+      {slug !== 'subscribe' && (
+        <div>
+          <CTABlock />
+        </div>
+      )}
     </>
   )
 }

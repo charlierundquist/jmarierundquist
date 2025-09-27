@@ -2,6 +2,7 @@ import { platformSelect } from '@/app/fields/platformSelect'
 import { GlobalConfig } from 'payload'
 import { ctaBlockField } from '../CTABlock/config'
 import { revalidateTag } from 'next/cache'
+import { mailerliteSubscribeField } from '@/app/components/MailerLitePopup/mailerliteSubscribe'
 
 export const SiteDetails: GlobalConfig = {
   slug: 'site-details',
@@ -48,5 +49,43 @@ export const SiteDetails: GlobalConfig = {
       ],
     },
     ctaBlockField,
+    {
+      name: 'mailerlitePopup',
+      type: 'group',
+      fields: [
+        {
+          name: 'display',
+          type: 'radio',
+          required: true,
+          defaultValue: 'none',
+          options: [
+            {
+              label: 'Corner',
+              value: 'corner',
+            },
+            {
+              label: 'Center',
+              value: 'center',
+            },
+            {
+              label: 'Do not display',
+              value: 'none',
+            },
+          ],
+        },
+        {
+          name: 'reappearDelay',
+          label: 'Reappear Delay (minutes)',
+          type: 'number',
+          admin: {
+            step: 1,
+            style: {
+              width: '20rem',
+            },
+          },
+        },
+        mailerliteSubscribeField,
+      ],
+    },
   ],
 }

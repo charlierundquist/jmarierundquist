@@ -7,6 +7,7 @@ import { ImageGrid } from '@/app/blocks/ImageGrid/config'
 import { ListGrid } from '@/app/blocks/ListGrid/config'
 import { LongContentOneColumn } from '@/app/blocks/LongContentOneColumn/config'
 import { LongContentTwoColumn } from '@/app/blocks/LongContentTwoColumn/config'
+import { MailerLiteSubscribe } from '@/app/blocks/MailerLiteSubscribe/config'
 import { PraiseDisplay } from '@/app/blocks/PraiseDisplay/config'
 import { ShortContent } from '@/app/blocks/ShortContent/config'
 import { HeroField } from '@/app/components/Hero/config'
@@ -114,6 +115,7 @@ export const Pages: CollectionConfig = {
                 ListGrid,
                 ContactForm,
                 ImageGrid,
+                MailerLiteSubscribe,
               ],
               label: false,
             },

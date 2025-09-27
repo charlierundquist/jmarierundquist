@@ -40,7 +40,7 @@ export function HeroLarge(props: Page['hero']) {
         <CMSImage
           priority
           resource={props.backgroundImage}
-          imgClassName="object-top-left h-full object-cover"
+          imgClassName="object-center h-full object-cover"
           pictureClassName="absolute! top-0 left-0 -z-20 h-full w-3/4"
           className=""
         ></CMSImage>

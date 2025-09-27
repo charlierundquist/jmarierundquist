@@ -6,5 +6,5 @@ type CTAProps = {
 }
 
 export const CTABlockClient: React.FC<CTAProps> = (props: { columns: ColumnContent[] }) => {
-  return <BlockTemplate content={props.columns} className="mb-16"></BlockTemplate>
+  return <BlockTemplate content={props.columns} className="-mb-16"></BlockTemplate>
 }
