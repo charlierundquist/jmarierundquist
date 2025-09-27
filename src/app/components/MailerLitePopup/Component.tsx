@@ -5,6 +5,9 @@ import { MailerLitePopupClient } from './Component.client'
 export async function MailerLitePopup() {
   const siteDetails: SiteDetail = await getCachedGlobal('site-details', 1)()
   const mailerlitePopup = siteDetails.mailerlitePopup
+
+  if (!mailerlitePopup) return null
+
   const popupContent = mailerlitePopup.popupContent
 
   if (typeof popupContent != 'undefined' && popupContent) {
