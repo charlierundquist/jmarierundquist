@@ -5,18 +5,18 @@ import { MailerLitePopupClient } from './Component.client'
 export async function MailerLitePopup() {
   const siteDetails: SiteDetail = await getCachedGlobal('site-details', 1)()
   const mailerlitePopup = siteDetails.mailerlitePopup
+  const popupContent = mailerlitePopup.popupContent
 
-  if (typeof mailerlitePopup.popupContent === 'undefined' || mailerlitePopup.popupContent == null)
-    return null
-
-  return (
-    <MailerLitePopupClient
-      {...{
-        display: mailerlitePopup.display,
-        reappearDelay: mailerlitePopup.reappearDelay,
-        popupContent: mailerlitePopup.popupContent,
-        blockType: 'mailer-lite-subscribe',
-      }}
-    />
-  )
+  if (typeof popupContent != 'undefined' && popupContent) {
+    return (
+      <MailerLitePopupClient
+        {...{
+          display: mailerlitePopup.display,
+          reappearDelay: mailerlitePopup.reappearDelay,
+          popupContent: popupContent,
+          blockType: 'mailer-lite-subscribe',
+        }}
+      />
+    )
+  }
 }
