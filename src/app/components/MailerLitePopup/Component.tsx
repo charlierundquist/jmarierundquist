@@ -8,6 +8,19 @@ export async function MailerLitePopup() {
   const popupContent = mailerlitePopup.popupContent
 
   if (typeof popupContent != 'undefined' && popupContent) {
+    const { title, subtitle, confirmationMessage } = popupContent
+
+    if (
+      !title ||
+      typeof title === 'undefined' ||
+      !subtitle ||
+      typeof subtitle === 'undefined' ||
+      !confirmationMessage ||
+      typeof confirmationMessage === 'undefined'
+    ) {
+      return null
+    }
+
     return (
       <MailerLitePopupClient
         {...{
