@@ -6,7 +6,7 @@ export async function MailerLitePopup() {
   const siteDetails: SiteDetail = await getCachedGlobal('site-details', 1)()
   const mailerlitePopup = siteDetails.mailerlitePopup
 
-  if (typeof mailerlitePopup.popupContent === 'undefined' || !mailerlitePopup.popupContent)
+  if (typeof mailerlitePopup.popupContent === 'undefined' || mailerlitePopup.popupContent == null)
     return null
 
   return (
