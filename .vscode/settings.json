@@ -39,5 +39,6 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "postman.settings.dotenv-detection-notification-visibility": false
 }

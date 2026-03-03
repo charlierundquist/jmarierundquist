@@ -66,6 +66,12 @@ export function ContactFormBlock(block: ContactForm) {
             </div>
           )
         })}
+        <div>
+          <div
+            className="g-recaptcha"
+            data-sitekey="6LeOp34sAAAAAAQvQp6mv_lNBHre_0tHG4GQ4shO"
+          ></div>
+        </div>
         <div className="mx-auto mt-4 flex w-min flex-wrap items-center justify-center gap-2 lg:mx-0 lg:w-fit">
           <input
             type="submit"

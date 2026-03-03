@@ -419,7 +419,6 @@ export interface Page {
         | ListGrid
         | ContactForm
         | ImageGrid
-        | MailerLiteSubscribe
       )[]
     | null;
   folder?: (number | null) | FolderInterface;
@@ -913,48 +912,6 @@ export interface ImageNoLink {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MailerLiteSubscribe".
- */
-export interface MailerLiteSubscribe {
-  popupContent?: {
-    title?: string | null;
-    subtitle?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    confirmationMessage?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'mailer-lite-subscribe';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-folders".
  */
 export interface FolderInterface {
@@ -1311,7 +1268,6 @@ export interface PagesSelect<T extends boolean = true> {
         'list-grid'?: T | ListGridSelect<T>;
         'contact-form'?: T | ContactFormSelect<T>;
         'image-grid'?: T | ImageGridSelect<T>;
-        'mailer-lite-subscribe'?: T | MailerLiteSubscribeSelect<T>;
       };
   folder?: T;
   updatedAt?: T;
@@ -1538,21 +1494,6 @@ export interface ImageLinkSelect<T extends boolean = true> {
  */
 export interface ImageNoLinkSelect<T extends boolean = true> {
   imageSelect?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "MailerLiteSubscribe_select".
- */
-export interface MailerLiteSubscribeSelect<T extends boolean = true> {
-  popupContent?:
-    | T
-    | {
-        title?: T;
-        subtitle?: T;
-        confirmationMessage?: T;
-      };
   id?: T;
   blockName?: T;
 }
@@ -1893,43 +1834,6 @@ export interface SiteDetail {
         }[]
       | null;
   };
-  mailerlitePopup: {
-    display: 'corner' | 'center' | 'none';
-    reappearDelay?: number | null;
-    popupContent?: {
-      title?: string | null;
-      subtitle?: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      } | null;
-      confirmationMessage?: {
-        root: {
-          type: string;
-          children: {
-            type: string;
-            version: number;
-            [k: string]: unknown;
-          }[];
-          direction: ('ltr' | 'rtl') | null;
-          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-          indent: number;
-          version: number;
-        };
-        [k: string]: unknown;
-      } | null;
-    };
-  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2047,19 +1951,6 @@ export interface SiteDetailsSelect<T extends boolean = true> {
                     linkText?: T;
                   };
               id?: T;
-            };
-      };
-  mailerlitePopup?:
-    | T
-    | {
-        display?: T;
-        reappearDelay?: T;
-        popupContent?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              confirmationMessage?: T;
             };
       };
   updatedAt?: T;
