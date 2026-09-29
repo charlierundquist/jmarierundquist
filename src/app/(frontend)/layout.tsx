@@ -44,6 +44,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                     })(window, document, 'script', 'https://assets.mailerlite.com/js/universal.js', 'ml')
                     ml('account', '542048')`}
         </Script>
+        <Script
+          id="recaptchaScript"
+          src="https://www.google.com/recaptcha/api.js"
+          async
+          defer
+        ></Script>
       </head>
       <body suppressHydrationWarning>
         <Header></Header>

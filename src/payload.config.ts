@@ -2,7 +2,7 @@
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 // import { postgresAdapter } from '@payloadcms/db-postgres'
 // import { uploadthingStorage } from '@payloadcms/storage-uploadthing'
-// import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
+import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 // import { convertLexicalToHTML } from '@payloadcms/richtext-lexical/html'
@@ -77,7 +77,7 @@ export default buildConfig({
     apiKey: env.RESEND_API_KEY || '',
   }),
   plugins: [
-    // payloadCloudPlugin(),
+    payloadCloudPlugin(),
     formBuilderPlugin({
       formOverrides: {
         admin: {
