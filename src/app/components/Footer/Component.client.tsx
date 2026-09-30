@@ -76,7 +76,7 @@ export const FooterClient: React.FC<FooterClientProps> = ({
           West Saint Paul, MN 55118
         </div> */}
         <div className={`mx-auto ${hasExtraInfo && 'lg:mx-0!'} text-center sm:text-left`}>
-          © Copyright {new Date().getFullYear()}{' '}
+          © Copyright 2026&nbsp;
           <Link href={'https://dawnskywebdesign.com'} target="_blank">
             Dawn Sky Web Design
           </Link>

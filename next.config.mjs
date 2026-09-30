@@ -13,16 +13,21 @@ const nextConfig = {
         pathname: '/api/media/file/**',
       },
     ],
+    qualities: [100, 75]
   },
-  webpack: (webpackConfig) => {
-    webpackConfig.resolve.extensionAlias = {
-      '.cjs': ['.cts', '.cjs'],
-      '.js': ['.ts', '.tsx', '.js', '.jsx'],
-      '.mjs': ['.mts', '.mjs'],
-    }
+  // webpack: (webpackConfig) => {
+  //   webpackConfig.resolve.extensionAlias = {
+  //     '.cjs': ['.cts', '.cjs'],
+  //     '.js': ['.ts', '.tsx', '.js', '.jsx'],
+  //     '.mjs': ['.mts', '.mjs'],
+  //   }
 
-    return webpackConfig
+  //   return webpackConfig
+  // },
+  turbopack: {
+    resolveExtensions: ['.cts', '.cjs', '.ts', '.tsx', '.js', '.jsx', '.mts', '.mjs']
   },
+  cacheComponents: true,
   async rewrites() {
     return [
       {
