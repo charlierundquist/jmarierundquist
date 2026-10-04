@@ -2,7 +2,6 @@ import { withPayload } from '@payloadcms/next/withPayload'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   outputFileTracingIncludes: {
     './**/*': ['./node_modules/@libsql/darwin*/**/*', './node_modules/@libsql/linux*/**/*'],
   },
@@ -14,6 +13,7 @@ const nextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ['jmarierundquist.com'],
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
       '.cjs': ['.cts', '.cjs'],
