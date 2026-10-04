@@ -12,7 +12,7 @@ export function ImageGridBlock(block: ImageGrid) {
         {block.subtitle && <RichText className="text-center" data={block.subtitle} />}
         <hr className="mx-auto" />
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-3">
-          <RenderBlocks blocks={block.items} className="max-w-xs"></RenderBlocks>
+          <RenderBlocks blocks={block.items?.reverse()} className="max-w-xs"></RenderBlocks>
         </div>
       </>
     ),
