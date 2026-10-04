@@ -64,6 +64,7 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URI || '',
     },
+    push: false,
   }),
   // db: postgresAdapter({
   //   pool: {
