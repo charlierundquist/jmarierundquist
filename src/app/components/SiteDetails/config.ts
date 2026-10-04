@@ -8,7 +8,7 @@ export const SiteDetails: GlobalConfig = {
   hooks: {
     afterChange: [
       () => {
-        revalidateTag('global_site-details')
+        revalidateTag('global_site-details', "max")
       },
     ],
   },

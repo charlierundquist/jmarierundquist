@@ -18,8 +18,8 @@ export const revalidateFunction: CollectionAfterChangeHook = async ({ doc, previ
   try {
     const docSlug = doc.slug
     const previousDocSlug = previousDoc.slug
-    revalidateTag(`page_${docSlug}`)
-    revalidateTag(`page_${previousDocSlug}`)
+    revalidateTag(`page_${docSlug}`, "max")
+    revalidateTag(`page_${previousDocSlug}`, "max")
     console.log(`Revalidated services cache for: ${doc.title}`)
   } catch (error) {
     console.error('Error revalidating services cache:', error)

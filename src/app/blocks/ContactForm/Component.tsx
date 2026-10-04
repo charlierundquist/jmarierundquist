@@ -3,7 +3,6 @@ import { ContactForm } from '@/payload-types'
 import { BlockTemplate, ColumnContent } from '../BlockTemplate'
 import { RichText } from '@/app/components/RichText'
 import { useRef, useState } from 'react'
-import Script from 'next/script'
 
 export function ContactFormBlock(block: ContactForm) {
   const [confirmShowing, setConfirmShowing] = useState(false)
@@ -24,25 +23,6 @@ export function ContactFormBlock(block: ContactForm) {
       field: name,
       value: value.toString(),
     }))
-
-    //     type CaptchaResponseType = {
-    //   success: true|false,
-    //   challenge_ts: string,  // timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
-    //   hostname: string,         // the hostname of the site where the reCAPTCHA was solved
-    //   "error-codes"?: [...]        // optional
-    // }
-
-    //     const captchaResponse: Promise<CaptchaResponseType> = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-    //       method: 'POST',
-    //       body: JSON.stringify({
-    //         secret: process.env.RECAPTCHA_SECRET_KEY,
-    //         response: dataToSend[dataToSend.length - 1].value,
-    //       })
-    //     })
-
-    //     if (!captchaResponse.success) {
-
-    //     }
 
     const response = await fetch('/api/form-submissions', {
       method: 'POST',
@@ -129,15 +109,5 @@ export function ContactFormBlock(block: ContactForm) {
     className: 'h-fit',
   }
 
-  return (
-    <>
-      <Script
-        id="recaptchaScript"
-        src="https://www.google.com/recaptcha/api.js"
-        async
-        defer
-      ></Script>
-      <BlockTemplate content={[leadingContentCol, contentCol]} />
-    </>
-  )
+  return <BlockTemplate content={[leadingContentCol, contentCol]} />
 }
